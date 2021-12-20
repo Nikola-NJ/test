@@ -34,6 +34,10 @@ if(ISSET($_GET["id"]))
     foreach($resultDB["data"] as $res => $r){
         $resultDB["data"][$res]['Username'] = $resultDB["data"][$res]['Username'] ?? $r['Username2'];
         $resultDB["data"][$res]['odgovor'] = $resultDB["data"][$res]['odgovor'] ?? $r['input'];
+        if($resultDB["data"][$res]['Username'] == NULL){
+            unset($resultDB["data"][$res]);
+        }
+        
     }
     
 
