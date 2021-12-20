@@ -76,6 +76,7 @@ if(ISSET($_GET["id"]))
 
     function fillForm($resultDB,$user)
     {
+        echo"hello";
         echo "<h1>".$resultDB[1]["naziv"]."</h1>";
         $formHelper = new FormHelper("POST","submitdata.php");
         $formHelper->open_tag("register-form");
