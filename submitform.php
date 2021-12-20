@@ -1,3 +1,19 @@
+<?php
+if(session_id() === "")
+{
+    session_start();
+}
+require_once "classes/bussinesLogic.php";
+require_once "util.php";
+require_once "classes/FormHelper.php";
+
+$user = unserialize($_SESSION["user"]);
+
+if($user[0]["rola"] == 1)
+{
+    require_once "nav.php";
+}
+?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -45,22 +61,8 @@
 </script>
 </head>
 <body>
+
 <?php
-if(session_id() === "")
-{
-    session_start();
-}
-require_once "classes/bussinesLogic.php";
-require_once "util.php";
-require_once "classes/FormHelper.php";
-
-$user = unserialize($_SESSION["user"]);
-
-if($user[0]["rola"] == 1)
-{
-    require_once "nav.php";
-}
-
 if(ISSET($_GET["id"]))
 {
     $id = trim($_GET["id"]);
@@ -76,7 +78,6 @@ if(ISSET($_GET["id"]))
 
     function fillForm($resultDB,$user)
     {
-        echo"hello";
         echo "<h1>".$resultDB[1]["naziv"]."</h1>";
         $formHelper = new FormHelper("POST","submitdata.php");
         $formHelper->open_tag("register-form");
