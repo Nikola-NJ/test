@@ -195,3 +195,7 @@ h4 { font-style: italic; }
     border:1px solid red;
 
 }
+
+.errorClass{
+    color:red;
+}

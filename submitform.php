@@ -27,25 +27,35 @@ if($user[0]["rola"] == 1)
 
     $("#register-form").submit(function(){
     var isFormValid = true;
+    
 
-    $(".required").each(function(){
-        if ($.trim($(this).val()).length == 0){
-            $(this).addClass("highlight");
-            isFormValid = false;
-        }
-        else{
-            $(this).removeClass("highlight");   
-        }
-    });
+        $(".required").each(function(){
+        var span = $("#" + "error" + $(this).attr("id"));
+            
+            if ($.trim($(this).val()).length == 0){
+                $(this).addClass("highlight");
+                span.text("Obavezno polje!");
+                isFormValid = false;
+            }
+            else{
+                $(this).removeClass("highlight");  
+                span.text(""); 
+            }
+        });
 
 
 
-    $(".requiredBox").each(function(){
-        var name = this.name;
-        if (!$('input[name='+ name +']:checked').length > 0) {   
-            isFormValid = false;
-        }
-    });
+        $(".requiredBox").each(function(){
+            var name = this.name;
+            var span = $("#" + "error" + $(this).attr("id"));
+
+            if (!$('input[name='+ name +']:checked').length > 0) {   
+                isFormValid = false;
+                span.text("Obavezno polje!");
+            }else{
+                span.text(""); 
+            }
+        });
     
     
     if (!isFormValid) alert("Please fill in all the required fields");
@@ -84,11 +94,15 @@ if(ISSET($_GET["id"]))
         $pitanje = "";
         foreach($resultDB as $data)
         {
-            
+           
             if($pitanje != $data["pitanje"])
             {
+                
                 $pitanje = $data["pitanje"];
                 echo $pitanje;
+                ?>
+                <span class ="errorClass" id="error<?php echo $data["questionsID"] ?>"></span>
+                <?php
                 echo "<br>";
             }
                      
@@ -97,16 +111,16 @@ if(ISSET($_GET["id"]))
                 //name parametar
                 // inpytype.questionid.answerid
                 case Short_Answer:
-                        $formHelper->input("text","text_".$data["questionsID"],"","required");
+                        $formHelper->input("text","text_".$data["questionsID"],"","required",$data["questionsID"]);
                     break;
                 
                 case Multiple_Choice:
-                        $formHelper->input("checkbox","checkbox_".$data["questionsID"]."_".$data["answerID"],$data["odgovor"]);
+                        $formHelper->input("checkbox","checkbox_".$data["questionsID"]."_".$data["answerID"],$data["odgovor"],"klasa",$data["questionsID"]);
                         echo "<label>".$data["odgovor"]."</label>";
                     break;
 
                 case One_Answer:
-                        $formHelper->input("radio","radio_".$data["questionsID"],$data["odgovor"]."_".$data["answerID"],"requiredBox");
+                        $formHelper->input("radio","radio_".$data["questionsID"],$data["odgovor"]."_".$data["answerID"],"requiredBox",$data["questionsID"]);
                         echo $data["odgovor"];
                         
                     break;
