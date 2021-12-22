@@ -2,7 +2,7 @@
     //db params
     defined("DB_SERVER") ? "" : define("DB_SERVER","localhost");
     defined("DB_USERNAME") ? "" : define("DB_USERNAME","root");
-    defined("DB_PASSWORD") ? "" : define("DB_PASSWORD","srecko31.");
+    defined("DB_PASSWORD") ? "" : define("DB_PASSWORD","");
     defined("DB_NAME") ? "" : define("DB_NAME","forma");
 
     //role

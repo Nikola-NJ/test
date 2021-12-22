@@ -38,18 +38,16 @@ if($user[0]["rola"] == 1)
         }
     });
 
-/*
+
+
     $(".requiredBox").each(function(){
-        
-        if ($(this).is(":not(:checked)")){
+        var name = this.name;
+        if (!$('input[name='+ name +']:checked').length > 0) {   
             isFormValid = false;
-            
-        }
-        else{
-            $(this).removeClass("highlight");   
         }
     });
-*/
+    
+    
     if (!isFormValid) alert("Please fill in all the required fields");
     return isFormValid;
 });
