@@ -28,7 +28,7 @@ if($user[0]["rola"] == 1)
     $("#register-form").submit(function(){
     var isFormValid = true;
     
-
+//Input Validation
         $(".required").each(function(){
         var span = $("#" + "error" + $(this).attr("id"));
             
@@ -43,13 +43,27 @@ if($user[0]["rola"] == 1)
             }
         });
 
-
+//Radio Validation
 
         $(".requiredBox").each(function(){
             var name = this.name;
             var span = $("#" + "error" + $(this).attr("id"));
 
             if (!$('input[name='+ name +']:checked').length > 0) {   
+                isFormValid = false;
+                span.text("Obavezno polje!");
+            }else{
+                span.text(""); 
+            }
+        });
+
+//Checkbox Validation
+        $(".requiredCheckBox").each(function(){
+            var className = this.className.split(' ')[1];
+            
+            var span = $("#" + "error" + $(this).attr("id"));
+            
+            if(!$("." + className + ":checkbox:checked").length > 0){ 
                 isFormValid = false;
                 span.text("Obavezno polje!");
             }else{
@@ -115,7 +129,7 @@ if(ISSET($_GET["id"]))
                     break;
                 
                 case Multiple_Choice:
-                        $formHelper->input("checkbox","checkbox_".$data["questionsID"]."_".$data["answerID"],$data["odgovor"],"klasa",$data["questionsID"]);
+                        $formHelper->input("checkbox","checkbox_".$data["questionsID"]."_".$data["answerID"],$data["odgovor"],"requiredCheckBox ". $data["questionsID"],$data["questionsID"]);
                         echo "<label>".$data["odgovor"]."</label>";
                     break;
 
