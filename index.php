@@ -52,11 +52,16 @@ if($user[0]["rola"] == 1)
                                 <h2>%s</h2>
                                 <h4>%s</h4>
                             </div></a>
-                            <div class='deleteForm'>
-                                <a href='deleteForm.php?id=%s'><ion-icon class='circle' name='close-circle-outline'></ion-icon></a>
+                            <div class='updateDelete'>
+                                <div>
+                                    <a href='deleteForm.php?id=%s'><ion-icon class='circleDelete' name='close-circle-outline'></ion-icon></a>
+                                </div>
+                                <div>
+                                    <a href='updateForm.php?id=%s'><ion-icon class='circleUpdate' name='sync-circle-outline'></ion-icon></a>
+                                </div>
                             </div>
                             " 
-                        ,$form["ID"],$form["TITLE"], $form["DESCRIPTION"],$form["ID"]);
+                        ,$form["ID"],$form["TITLE"], $form["DESCRIPTION"],$form["ID"],$form["ID"]);
                 }else{
 
                     printf("<a class='kocka' href='submitform.php?id=%s'>
