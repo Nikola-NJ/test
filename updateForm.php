@@ -197,11 +197,22 @@ if(isset($_GET["id"]))
                     </tr>
             </table>
             <?php
-            $i=1;
-            foreach($formData['data'] as $data)
+            $i=0;
+            foreach($formData['data'] as $questionID=>$data)
             {
                 $i++;
                 echo '<table id="tabela'.$i.'"><tr id="question'.$i.'"><td><input type="text" name="pitanja[]" class="questionInput" value="'.$data['question'].'" placeholder="Enter question here" required></td><td><select name="tip[]" id="selectType'.$i.'" class="selectType" mandatory></select></td><td><button type="button" name="removeQ" id="'.$i.'" class="removeQuestion" >X</button></td></tr><tr id="answers'.$i.'" class="answerClass'.$i.'"><td><input type="text" name="answers'.$i.'[]" placeholder="Enter answer here" required></td><td><button type="button" id="'.$i.'" name="add" class="addAnswer"  >Add More</button></td></tr></table>';
+                $count = 0;
+                $x = $questionID;
+                $type = $data["type"];
+                foreach($data["answers"] as $answer)
+                {
+                    $count++;
+                    if($type != 1)
+                    {
+                        echo '<tr id="answers'.$count.'" class="answerClass'.$x.'">  <td><input type="text"  name="answers'.$x.'[]" value = "'.$answer.'" placeholder="Enter answer here" required></td><td><button type="button" name="removeA" id="'.$count.'" class="removeAnswer" >X</button></td></tr>';
+                    }
+                }
             }
 
 ?>
